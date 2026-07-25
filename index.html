@@ -15,16 +15,16 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo-container">
-      <div class="badge-glow">LP</div>
+      <img id="league-logo-img" src="https://cdn-icons-png.flaticon.com/512/824/824722.png" class="league-logo" alt="Lig Logosu">
       <div>
-        <h1>LOS PESİCOS</h1>
+        <h1 id="league-title-text">LOS PESİCOS</h1>
         <p>PROFESYONEL LİG SİSTEMİ</p>
       </div>
     </div>
 
     <nav class="nav-links">
       <a href="#puan-durumu" class="active">Puan Durumu</a>
-      <a href="#fikstur">Fikstür</a>
+      <a href="#haberler">Haberler</a>
       <a href="#sampuanlar-ligi">Şampuanlar Ligi</a>
     </nav>
 
@@ -33,24 +33,25 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
   <main class="container">
+    <!-- Hero & Admin Yönetim Paneli -->
     <section class="hero">
       <div class="hero-text">
         <span class="live-pill">● CANLI SEZON</span>
         <h2>ŞAMPUANLAR LİGİ <span>MÜCADELESİ</span></h2>
-        <p>Şampiyonluk yarışı, ön eleme hattı ve canlı maç merkeziyle profesyonel rekabet alanı.</p>
+        <p>İstatistikleri canlı yönetin, lig logosunu ve haber akışını anlık güncelleyin.</p>
       </div>
 
-      <!-- Admin Hızlı Panel (Sadece Admin Giriş Yapınca Görünür) -->
       <div id="admin-control-card" class="admin-card hidden">
         <div class="admin-header">
           ⚡ <h3>ADMIN YÖNETİM PANELİ</h3>
         </div>
-        <p>Lig tablosunu ve verileri canlı olarak buradan yönetebilirsiniz.</p>
+        <p>Aşağıdaki butonları kullanarak sitenin tüm verilerini değiştirebilirsiniz:</p>
         <div class="admin-actions">
-          <button onclick="addNewTeamPrompt()" class="btn-admin-action">+ Yeni Takım Ekle</button>
-          <button onclick="toggleEditMode()" id="edit-toggle-btn" class="btn-admin-action warning">✏️ Tablo Düzenlemeyi Aç</button>
+          <button onclick="changeLeagueLogoPrompt()" class="btn-admin-action" style="background:#8b5cf6;">🏆 Lig Logosunu Değiştir</button>
+          <button onclick="addNewTeamPrompt()" class="btn-admin-action">+ Takım Ekle</button>
+          <button onclick="addNewNewsPrompt()" class="btn-admin-action" style="background:#10b981;">📰 Haber Ekle</button>
+          <button onclick="toggleEditMode()" id="edit-toggle-btn" class="btn-admin-action warning">✏️ Tabloyu Düzenle</button>
         </div>
       </div>
     </section>
@@ -58,14 +59,7 @@
     <!-- Puan Durumu Section -->
     <section id="puan-durumu" class="glass-section">
       <div class="section-header">
-        <div>
-          <h2>LİG PUAN DURUMU</h2>
-          <p class="subtitle">Güncel sıralama ve averaj tablosu</p>
-        </div>
-        <div class="legend">
-          <span class="badge-sl">■ İlk 3: Şampuanlar Ligi</span>
-          <span class="badge-playoff">■ 4-5: Ön Eleme</span>
-        </div>
+        <h2>LİG PUAN DURUMU</h2>
       </div>
 
       <div class="table-wrapper">
@@ -73,6 +67,7 @@
           <thead>
             <tr>
               <th>#</th>
+              <th>LOGO</th>
               <th>TAKIM</th>
               <th>O</th>
               <th>G</th>
@@ -91,20 +86,30 @@
         </table>
       </div>
     </section>
+
+    <!-- Haberler Section -->
+    <section id="haberler" class="glass-section" style="margin-top: 2rem;">
+      <div class="section-header">
+        <h2>LİG HABERLERİ</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Son gelişmeler ve transfer haberleri</p>
+      </div>
+
+      <div id="news-grid" class="news-grid">
+        <!-- JS Dinamik Dolduracak -->
+      </div>
+    </section>
   </main>
 
-  <!-- Giriş Modalı (Popup) -->
+  <!-- Giriş Popup Modalı -->
   <div id="login-modal" class="modal-backdrop hidden">
     <div class="modal-card">
       <button class="modal-close" onclick="closeLoginModal()">✕</button>
       <h2>SİSTEME GİRİŞ</h2>
-      <p>Lütfen yetkinize uygun giriş türünü seçin:</p>
       
       <div class="form-group">
         <label>Giriş Türü</label>
         <select id="login-role">
           <option value="admin">Admin (Tam Yetki)</option>
-          <option value="team">Takım Yöneticisi</option>
         </select>
       </div>
 
