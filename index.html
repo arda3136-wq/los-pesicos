@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOS PESİCOS - Profesyonel Lig Sistemi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header / Üst Menü -->
+  <header class="navbar">
+    <div class="logo-container">
+      <div class="badge">LP</div>
+      <div>
+        <h1>LOS PESİCOS</h1>
+        <p>Profesyonel Lig Sistemi</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#puan-durumu">Puan Durumu</a>
+      <a href="#fikstur">Fikstür</a>
+      <a href="#sampuanlar-ligi">Şampuanlar Ligi</a>
+      <a href="#istatistikler">İstatistikler</a>
+      <a href="#haberler">Haberler</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="tag">Yeni Sezon Başlıyor</span>
+      <h2>LOS PESİCOS <span>Sahnesi</span></h2>
+      <p>Lig yarışı, ŞAMPUANLAR LİGİ bileti, ön eleme hattı ve canlı maç takibiyle rekabetçi futbol merkezi.</p>
+    </div>
+    <div class="live-card">
+      <div class="card-header">
+        <h3>Canlı Maç</h3>
+        <span class="status-badge">YAKINDA</span>
+      </div>
+      <div class="match-info" id="live-match">
+        <p>Henüz aktif canlı maç bulunmuyor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Puan Durumu Section -->
+  <section id="puan-durumu" class="section">
+    <div class="section-title">
+      <h2>Puan Durumu</h2>
+      <p>Lig Tablosu</p>
+      <div class="legend">
+        <span class="sl-qualified">İlk 3: Şampuanlar Ligi</span>
+        <span class="playoff-qualified">4-5: Ön Eleme</span>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="league-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Takım</th>
+            <th>O</th>
+            <th>G</th>
+            <th>B</th>
+            <th>M</th>
+            <th>AG</th>
+            <th>YG</th>
+            <th>AV</th>
+            <th>P</th>
+            <th>Form</th>
+          </tr>
+        </thead>
+        <tbody id="standings-body">
+          <!-- JS ile dinamik dolacak -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
