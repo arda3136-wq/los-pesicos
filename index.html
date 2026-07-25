@@ -3,81 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOS PESİCOS - Profesyonel Lig Sistemi</title>
+  <title>LOS PESİCOS - Profesyonel Lig Merkezi</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Header / Üst Menü -->
+  <!-- Arka Plan Katmanı -->
+  <div class="bg-overlay"></div>
+
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo-container">
-      <div class="badge">LP</div>
+      <div class="badge-glow">LP</div>
       <div>
         <h1>LOS PESİCOS</h1>
-        <p>Profesyonel Lig Sistemi</p>
+        <p>PROFESYONEL LİG SİSTEMİ</p>
       </div>
     </div>
+
     <nav class="nav-links">
-      <a href="#puan-durumu">Puan Durumu</a>
+      <a href="#puan-durumu" class="active">Puan Durumu</a>
       <a href="#fikstur">Fikstür</a>
       <a href="#sampuanlar-ligi">Şampuanlar Ligi</a>
-      <a href="#istatistikler">İstatistikler</a>
-      <a href="#haberler">Haberler</a>
     </nav>
+
+    <div class="auth-buttons">
+      <button id="user-status-btn" class="btn-login" onclick="openLoginModal()">🔑 Giriş Yap</button>
+    </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <span class="tag">Yeni Sezon Başlıyor</span>
-      <h2>LOS PESİCOS <span>Sahnesi</span></h2>
-      <p>Lig yarışı, ŞAMPUANLAR LİGİ bileti, ön eleme hattı ve canlı maç takibiyle rekabetçi futbol merkezi.</p>
-    </div>
-    <div class="live-card">
-      <div class="card-header">
-        <h3>Canlı Maç</h3>
-        <span class="status-badge">YAKINDA</span>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="live-pill">● CANLI SEZON</span>
+        <h2>ŞAMPUANLAR LİGİ <span>MÜCADELESİ</span></h2>
+        <p>Şampiyonluk yarışı, ön eleme hattı ve canlı maç merkeziyle profesyonel rekabet alanı.</p>
       </div>
-      <div class="match-info" id="live-match">
-        <p>Henüz aktif canlı maç bulunmuyor.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Puan Durumu Section -->
-  <section id="puan-durumu" class="section">
-    <div class="section-title">
-      <h2>Puan Durumu</h2>
-      <p>Lig Tablosu</p>
-      <div class="legend">
-        <span class="sl-qualified">İlk 3: Şampuanlar Ligi</span>
-        <span class="playoff-qualified">4-5: Ön Eleme</span>
+      <!-- Admin Hızlı Panel (Sadece Admin Giriş Yapınca Görünür) -->
+      <div id="admin-control-card" class="admin-card hidden">
+        <div class="admin-header">
+          ⚡ <h3>ADMIN YÖNETİM PANELİ</h3>
+        </div>
+        <p>Lig tablosunu ve verileri canlı olarak buradan yönetebilirsiniz.</p>
+        <div class="admin-actions">
+          <button onclick="addNewTeamPrompt()" class="btn-admin-action">+ Yeni Takım Ekle</button>
+          <button onclick="toggleEditMode()" id="edit-toggle-btn" class="btn-admin-action warning">✏️ Tablo Düzenlemeyi Aç</button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="table-container">
-      <table class="league-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Takım</th>
-            <th>O</th>
-            <th>G</th>
-            <th>B</th>
-            <th>M</th>
-            <th>AG</th>
-            <th>YG</th>
-            <th>AV</th>
-            <th>P</th>
-            <th>Form</th>
-          </tr>
-        </thead>
-        <tbody id="standings-body">
-          <!-- JS ile dinamik dolacak -->
-        </tbody>
-      </table>
+    <!-- Puan Durumu Section -->
+    <section id="puan-durumu" class="glass-section">
+      <div class="section-header">
+        <div>
+          <h2>LİG PUAN DURUMU</h2>
+          <p class="subtitle">Güncel sıralama ve averaj tablosu</p>
+        </div>
+        <div class="legend">
+          <span class="badge-sl">■ İlk 3: Şampuanlar Ligi</span>
+          <span class="badge-playoff">■ 4-5: Ön Eleme</span>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>TAKIM</th>
+              <th>O</th>
+              <th>G</th>
+              <th>B</th>
+              <th>M</th>
+              <th>AG</th>
+              <th>YG</th>
+              <th>AV</th>
+              <th>P</th>
+              <th id="admin-th" class="hidden">İŞLEM</th>
+            </tr>
+          </thead>
+          <tbody id="league-body">
+            <!-- JS Dinamik Dolduracak -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Giriş Modalı (Popup) -->
+  <div id="login-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeLoginModal()">✕</button>
+      <h2>SİSTEME GİRİŞ</h2>
+      <p>Lütfen yetkinize uygun giriş türünü seçin:</p>
+      
+      <div class="form-group">
+        <label>Giriş Türü</label>
+        <select id="login-role">
+          <option value="admin">Admin (Tam Yetki)</option>
+          <option value="team">Takım Yöneticisi</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Şifre</label>
+        <input type="password" id="login-pass" placeholder="••••••••">
+      </div>
+
+      <button onclick="handleLogin()" class="btn-submit">GİRİŞ YAP</button>
     </div>
-  </section>
+  </div>
 
   <script src="script.js"></script>
 </body>
