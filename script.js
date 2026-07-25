@@ -117,3 +117,13 @@ function deleteTeam(id) {
   teams = teams.filter(t => t.id !== id);
   renderLeagueTable();
 }
+// Tıklama Garanti Dinleyicileri
+document.addEventListener("DOMContentLoaded", () => {
+  renderLeagueTable();
+
+  // Giriş Yap Butonuna Tıklama Event'i
+  const loginBtn = document.getElementById("user-status-btn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", openLoginModal);
+  }
+});
